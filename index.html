@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Grand Celebration for Chandrakala Garu's Retirement!</title>
+    <title>Happy Retirement Chandrakala Garu</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -12,29 +12,271 @@
             --ab-gold: #FFD700;
             --nature-green: #2d5a27;
             --white: #ffffff;
-            --dark-blue-gradient: linear-gradient(135deg, #0a1128, #001f5c);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
+        body, html {
             font-family: 'Poppins', sans-serif;
             background: #000;
             color: #fff;
-            overflow: hidden; /* Control overflow for login transition */
+            overflow: hidden;
+            width: 100%; height: 100%;
         }
 
-        /* --- GLOBAL ANIMATED BACKGROUND --- */
-        #animated-bg {
+        /* --- LOGIN SCREEN --- */
+        #login-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--dark-blue-gradient);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            z-index: -1;
-            opacity: 0; /* Hidden initially, controlled by JS */
-            transition: opacity 2s ease;
+            background: radial-gradient(circle at center, #0a1128 0%, #000 100%);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
         }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 50px; border-radius: 25px;
+            border: 2px solid var(--ab-gold);
+            text-align: center; width: 90%; max-width: 450px;
+            box-shadow: 0 0 50px rgba(0, 51, 153, 0.7);
+        }
+
+        .login-card h2 { font-family: 'Cinzel', serif; color: var(--ab-gold); margin-bottom: 20px; }
+
+        input {
+            width: 100%; padding: 15px; border-radius: 10px; border: none;
+            margin-bottom: 25px; font-size: 1.2rem; text-align: center;
+        }
+
+        .login-btn {
+            background: var(--ab-gold); color: var(--ab-blue);
+            padding: 15px 40px; font-weight: bold; border-radius: 50px;
+            border: none; cursor: pointer; font-size: 1.1rem; width: 100%;
+        }
+
+        /* --- MAIN CONTENT --- */
+        #main-content {
+            display: none; /* Hidden until login */
+            height: 100vh; overflow-y: auto; overflow-x: hidden;
+            background: #f4f7f6; color: #333;
+        }
+
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 51, 153, 0.6), rgba(0, 51, 153, 0.6)), 
+                        url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; color: white;
+            position: relative;
+        }
+
+        .header-glow {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            color: var(--ab-gold);
+            text-shadow: 0 0 20px var(--ab-gold);
+            animation: pulse 3s infinite alternate;
+        }
+        @keyframes pulse { from { text-shadow: 0 0 10px var(--ab-gold); } to { text-shadow: 0 0 40px var(--ab-gold); } }
+
+        .sub-message { font-family: 'Great Vibes', cursive; font-size: clamp(2rem, 5vw, 3.5rem); margin-top: 10px; }
+
+        /* Stats/Assignment Section */
+        .stat-section { padding: 80px 20px; text-align: center; max-width: 1200px; margin: auto; }
+
+        .stat-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 40px; }
+
+        .stat-box {
+            background: white; padding: 40px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            min-width: 280px; border-top: 8px solid var(--ab-blue);
+        }
+
+        .stat-box.nature { border-top-color: var(--nature-green); }
+
+        .stat-box h3 { font-size: 1.8rem; color: var(--ab-blue); margin-bottom: 10px; }
+        .stat-box.nature h3 { color: var(--nature-green); }
+
+        /* Gift Box Section */
+        .gift-section { background: #eef2f1; padding: 100px 20px; text-align: center; }
+
+        .gift-box {
+            background: var(--ab-blue); color: var(--ab-gold);
+            padding: 40px; border-radius: 20px; display: inline-block;
+            cursor: pointer; border: 4px dashed var(--ab-gold);
+            transition: 0.3s; font-weight: bold; font-size: 1.5rem;
+        }
+        .gift-box:hover { transform: scale(1.05); }
+
+        #family-messages { display: none; margin-top: 50px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        .msg-card { background: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; border-left: 5px solid var(--ab-gold); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        footer { background: #001133; color: white; padding: 60px; text-align: center; }
+
+        .dolphin { position: fixed; bottom: 30px; right: 30px; font-size: 4rem; z-index: 100; animation: swim 4s infinite ease-in-out; pointer-events: none; }
+        @keyframes swim { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(10deg); } }
+
+        canvas#sparkles { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99; }
+    </style>
+</head>
+<body onmousemove="spawnSparkle(event)">
+
+    <canvas id="sparkles"></canvas>
+
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>Welcome, Chandrakala Garu</h2>
+            <p>A special surprise is waiting for you...</p>
+            <input type="text" id="nameInput" placeholder="Type your name here">
+            <button class="login-btn" onclick="checkAccess()">UNLOCK CELEBRATION</button>
+            <p id="err" style="color: #ff6b6b; margin-top: 15px; display: none;">Please type 'chandrakala' to enter.</p>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <div style="background: rgba(255,255,255,0.2); padding: 5px 20px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 2px;">ANDHRA BANK LEGACY ACHIEVED</div>
+            <h1 class="header-glow">CHANDRAKALA GARU</h1>
+            <p class="sub-message">Happy Retirement & New Beginnings</p>
+            <button onclick="massivePoppers()" style="margin-top: 30px; padding: 15px 30px; border-radius: 50px; border: none; background: var(--ab-gold); color: var(--ab-blue); font-weight: bold; cursor: pointer;">🎉 CHEER AGAIN!</button>
+        </header>
+
+        <section class="stat-section">
+            <h2 style="font-family: 'Cinzel'; color: var(--ab-blue); margin-bottom: 20px;">Your Golden Achievement</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #555;">After years of incredible service and dedication, it's time to trade the bank ledgers for the beauty of nature.</p>
+            
+            <div class="stat-container">
+                <div class="stat-box">
+                    <p>Service Status</p>
+                    <h3>SUCCESSFULLY COMPLETED</h3>
+                </div>
+                <div class="stat-box nature">
+                    <p>Current Assignment</p>
+                    <h3>ENJOYING NATURE & SERENITY</h3>
+                </div>
+                <div class="stat-box">
+                    <p>New Priority</p>
+                    <h3>RELAXATION & FAMILY</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="gift-section">
+            <h2 style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--ab-blue); margin-bottom: 30px;">A Gift From Your Family</h2>
+            <div class="gift-box" onclick="revealMessages()">🎁 UNWRAP YOUR MESSAGES</div>
+            
+            <div id="family-messages">
+                <div class="msg-card"><strong>From Lohith:</strong><br>"Congratulations Akka! You've worked so hard for us all. Now, just sit back, enjoy the garden, and let us take care of you."</div>
+                <div class="msg-card"><strong>From the Family:</strong><br>"We are so proud of your 30+ years of dedication. You are our true Gold Medalist. Happy Retirement!"</div>
+                <div class="msg-card"><strong>The Nature Tip:</strong><br>"Now you have all the time to watch the sunrise and listen to the birds every single morning."</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made with all our love ❤️</p>
+            <p>© 2025 | The Best Career Ever</p>
+        </footer>
+    </div>
+
+    <div class="dolphin">🐬</div>
+
+    <audio id="cheerSound">
+        <source src="https://www.soundjay.com/human/sounds/applause-01.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 1. LOGIN ACCESS
+        function checkAccess() {
+            const val = document.getElementById('nameInput').value.toLowerCase().trim();
+            if (val === "chandrakala") {
+                // Play Cheer
+                const cheer = document.getElementById('cheerSound');
+                cheer.play().catch(e => console.log("Audio waiting for user interaction"));
+
+                // Hide Login
+                document.getElementById('login-screen').style.opacity = '0';
+                
+                // Show Content
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    document.body.style.overflow = 'auto';
+                    massivePoppers();
+                }, 1000);
+            } else {
+                document.getElementById('err').style.display = 'block';
+            }
+        }
+
+        // 2. CONFETTI EFFECT
+        function massivePoppers() {
+            const duration = 5 * 1000;
+            const animationEnd = Date.now() + duration;
+            const colors = ['#003399', '#FFD700', '#2d5a27', '#ffffff'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 80,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 80,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+                if (Date.now() < animationEnd) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // 3. REVEAL MESSAGES
+        function revealMessages() {
+            document.getElementById('family-messages').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('family-messages').offsetTop - 100,
+                behavior: 'smooth'
+            });
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // 4. MOUSE SPARKLES
+        const canvas = document.getElementById('sparkles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function spawnSparkle(e) {
+            confetti({
+                particleCount: 1,
+                startVelocity: 0,
+                ticks: 20,
+                gravity: 0.5,
+                origin: {
+                    x: e.clientX / window.innerWidth,
+                    y: e.clientY / window.innerHeight
+                },
+                colors: ['#FFD700'],
+                shapes: ['circle']
+            });
+        }
+    </script>
+</body>
+</html>
+
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
